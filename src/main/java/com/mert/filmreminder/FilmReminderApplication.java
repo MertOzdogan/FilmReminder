@@ -1,4 +1,4 @@
-package com.mert.FilmReminder;
+package com.mert.filmreminder;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
