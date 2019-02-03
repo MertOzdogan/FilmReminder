@@ -2,6 +2,9 @@ package com.mert.filmreminder.services;
 
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.HashSet;
@@ -59,5 +62,40 @@ public class FilmServiceTest {
 
 		final Set<Film> filmsByService = this.filmService.getFilms();
 		assertNotNull(filmsByService);
+	}
+
+	@Test
+	public void getByNameTest() {
+		final Film sashasTrouble = new Film();
+		sashasTrouble.setId(any());
+		sashasTrouble.setName("Sashas Trouble");
+		when(this.filmRepository.findByName("Sashas Trouble")).thenReturn(Optional.of(sashasTrouble));
+		assertNotNull(this.filmService.getFilmByName("Sashas Trouble"));
+	}
+
+	@Test
+	public void deleteByIdTest() { // given
+		final Long idToDelete = Long.valueOf(2L);
+
+		// when
+		this.filmService.deleteFilmById(idToDelete);
+
+		// no 'when', since method has void return type
+
+		// then
+		verify(this.filmRepository, times(1)).deleteById(anyLong());
+
+	}
+
+	@Test
+	public void deleteFilmTest() {
+		// given
+		final Film filmToDelete = new Film();
+		// when
+		this.filmService.deleteFilm(filmToDelete);
+
+		// then
+		verify(this.filmRepository, times(1)).delete(filmToDelete);
+
 	}
 }
