@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 import lombok.Data;
 
@@ -21,8 +21,8 @@ public class User {
 	private String username;
 	private String password;
 
-	@OneToMany
+	@ManyToMany(mappedBy = "usersWatched")
 	private Set<Film> watchedFilm = new HashSet<>();
-	@OneToMany
+	@ManyToMany(mappedBy = "usersWillWatch")
 	private Set<Film> willingToWatchFilms = new HashSet<>();
 }
