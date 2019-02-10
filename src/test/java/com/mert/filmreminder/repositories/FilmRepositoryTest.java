@@ -1,16 +1,17 @@
 package com.mert.filmreminder.repositories;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Optional;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.mert.filmreminder.domain.Film;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DataJpaTest
 @RunWith(SpringRunner.class)
@@ -22,6 +23,8 @@ public class FilmRepositoryTest {
 	@Test
 	public void findByIdTest() {
 		final Optional<Film> findByDescription = this.filmRepository.findById(1L);
+		Film film =findByDescription.get();
+
 		assertEquals("Sashas Dream", findByDescription.get().getName(), () -> "Film is not equal.");
 	}
 
